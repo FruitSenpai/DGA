@@ -34,6 +34,9 @@ export class AddEditComponent implements OnInit {
         this.form = this.formBuilder.group({
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
+            email: ['', Validators.required],
+            cellNumber:['', Validators.required],
+            telephoneNumber:[''],
             username: ['', Validators.required],
             password: ['', passwordValidators]
         });
@@ -45,6 +48,9 @@ export class AddEditComponent implements OnInit {
                     this.f.firstName.setValue(x.firstName);
                     this.f.lastName.setValue(x.lastName);
                     this.f.username.setValue(x.username);
+                    this.f.email.setValue(x.email);
+                    this.f.cellNumber.setValue(x.cellNumber);
+                    this.f.telephoneNumber.setValue(x.telephoneNumber);
                 });
         }
     }

@@ -30,6 +30,15 @@ namespace WebApi.Migrations.SqliteMigrations
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("CellNumber")
+                        .HasColumnType("TEXT");
+                    
+                    b.Property<string>("TelephoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
                     b.Property<byte[]>("PasswordHash")
                         .HasColumnType("BLOB");
 

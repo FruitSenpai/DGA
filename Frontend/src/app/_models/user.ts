@@ -4,5 +4,8 @@
     password: string;
     firstName: string;
     lastName: string;
+    email: string;
+    cellNumber: string;
+    telephoneNumber:string;
     token: string;
 }
