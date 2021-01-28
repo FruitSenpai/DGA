@@ -6,7 +6,7 @@ using AutoMapper;
 using WebApi.Helpers;
 using Microsoft.Extensions.Options;
 using System.Text;
-
+using Microsoft.AspNetCore.Authorization;
 using WebApi.Services;
 using WebApi.Entities;
 using WebApi.Models.Users;
@@ -19,16 +19,16 @@ namespace WebApi.Controllers
     [Route("[controller]")]
     public class FarmsController : ControllerBase
     {
-        private IFarmerService _farmerService;
+        private IFarmService _farmService;
         private IMapper _mapper;
         private readonly AppSettings _appSettings;
 
         public FarmsController(
-            IFarmerService farmerService,
+            IFarmService farmService,
             IMapper mapper,
             IOptions<AppSettings> appSettings)
         {
-            _farmerService = farmerService;
+            _farmService = farmService;
             _mapper = mapper;
             _appSettings = appSettings.Value;
         }
@@ -58,7 +58,7 @@ namespace WebApi.Controllers
         public IActionResult GetAll()
         {
             var farms = _farmService.GetAll();
-            var model = _mapper.Map<IList<FarmModel>>(farmss);
+            var model = _mapper.Map<IList<FarmModel>>(farms);
             return Ok(model);
         }
 

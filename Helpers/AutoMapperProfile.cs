@@ -13,6 +13,7 @@ namespace WebApi.Helpers
             CreateMap<RegisterModel, User>();
             CreateMap<UpdateModel, User>();
             CreateMap<Farm, FarmModel>();
+            CreateMap<FarmModel, Farm>();
         }
     }
 }

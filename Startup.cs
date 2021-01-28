@@ -81,6 +81,20 @@ namespace WebApi
 
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IFarmService, FarmService>();
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            /*services.AddSwaggerGen();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Pagado Logistic Service API",
+                    Version = "v1",
+                    Description = "Pagado Logistic Service API",
+                });
+            });*/
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,6 +104,18 @@ namespace WebApi
             dataContext.Database.Migrate();
 
             app.UseRouting();
+
+              // Enable middleware to serve generated Swagger as a JSON endpoint.
+            /*app.UseSwagger();
+
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });*/
+
 
             // global cors policy
             app.UseCors(x => x
