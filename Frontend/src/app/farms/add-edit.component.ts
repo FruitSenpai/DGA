@@ -2,7 +2,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-//you are here
+
 import { FarmService, AlertService } from '@app/_services';
 
 @Component({ templateUrl: 'add-edit.component.html' })
@@ -25,32 +25,34 @@ export class AddEditComponent implements OnInit {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
         
-        // password not required in edit mode
-        const passwordValidators = [Validators.minLength(6)];
-        if (this.isAddMode) {
-            passwordValidators.push(Validators.required);
-        }
+    
 
         this.form = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            email: ['', Validators.required],
-            cellNumber:['', Validators.required],
-            telephoneNumber:[''],
-            username: ['', Validators.required],
-            password: ['', passwordValidators]
+            name: ['', Validators.required],
+            owner: ['', Validators.required],
+            size: ['', Validators.required],
+            sizeUnit:['', Validators.required],
+            country:[''],
+            province:[''],
+            city:[''],
+            latitude: [''],
+            longitude: ['']
+            
         });
 
         if (!this.isAddMode) {
             this.farmService.getById(this.id)
                 .pipe(first())
                 .subscribe(x => {
-                    this.f.firstName.setValue(x.firstName);
-                    this.f.lastName.setValue(x.lastName);
-                    this.f.username.setValue(x.username);
-                    this.f.email.setValue(x.email);
-                    this.f.cellNumber.setValue(x.cellNumber);
-                    this.f.telephoneNumber.setValue(x.telephoneNumber);
+                    this.f.name.setValue(x.name);
+                    this.f.owner.setValue(x.owner);
+                    this.f.size.setValue(x.size);
+                    this.f.sizeUnit.setValue(x.sizeUnit);
+                    this.f.country.setValue(x.country);
+                    this.f.province.setValue(x.province);
+                    this.f.city.setValue(x.city);
+                    this.f.latitude.setValue(x.latitude);
+                    this.f.longitude.setValue(x.longitude);
                 });
         }
     }
@@ -71,18 +73,18 @@ export class AddEditComponent implements OnInit {
 
         this.loading = true;
         if (this.isAddMode) {
-            this.createUser();
+            this.createFarm();
         } else {
-            this.updateUser();
+            this.updateFarm();
         }
     }
 
-    private createUser() {
-        this.farmService.register(this.form.value)
+    private createFarm() {
+        this.farmService.create(this.form.value)
             .pipe(first())
             .subscribe(
                 data => {
-                    this.alertService.success('User added successfully', { keepAfterRouteChange: true });
+                    this.alertService.success('Farm added successfully', { keepAfterRouteChange: true });
                     this.router.navigate(['.', { relativeTo: this.route }]);
                 },
                 error => {
@@ -91,7 +93,7 @@ export class AddEditComponent implements OnInit {
                 });
     }
 
-    private updateUser() {
+    private updateFarm() {
         this.farmService.update(this.id, this.form.value)
             .pipe(first())
             .subscribe(

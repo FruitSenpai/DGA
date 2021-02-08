@@ -1,34 +1,34 @@
-﻿<h1>Users</h1>
-<a routerLink="add" class="btn btn-sm btn-success mb-2">Add User</a>
+﻿<h1>Farms</h1>
+<a routerLink="create" class="btn btn-sm btn-success mb-2">Create Farm</a>
 <table class="table table-striped">
     <thead>
         <tr>
-            <th style="width: 15%">First Name</th>
-            <th style="width: 15%">Last Name</th>
-            <th style="width: 10%">Username</th>
-            <th style="width: 20%">Email</th>
-            <th style="width: 15%">Cell Number</th>
-            <th style="width: 15%">Telephone Number</th>
+            <th style="width: 15%">Name</th>
+            <th style="width: 15%">Owner</th>
+            <th style="width: 10%">Size</th>
+            <th style="width: 10%">Unit</th>
+            <th style="width: 25%">Address</th>
+            <th style="width: 15%">Coordinates</th>
             <th style="width: 10%"></th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let user of users">
-            <td>{{user.firstName}}</td>
-            <td>{{user.lastName}}</td>
-            <td>{{user.username}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.cellNumber}}</td>
-            <td>{{user.telephoneNumber}}</td>
+        <tr *ngFor="let farm of farms">
+            <td>{{farm.name}}</td>
+            <td>{{farm.owner}}</td>
+            <td>{{farm.size}}</td>
+            <td>{{farm.sizeUnit}}</td>
+            <td>{{farm.city}}, {{farm.country}}, {{farm.province}}</td>
+            <td>{{farm.latitude}},{{farm.longitude}}</td>
             <td style="white-space: nowrap">
-                <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
-                <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">
-                    <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
-                    <span *ngIf="!user.isDeleting">Delete</span>
+                <a routerLink="edit/{{farm.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <button (click)="deleteFarm(farm.id)" class="btn btn-sm btn-danger btn-delete-farm" [disabled]="farm.isDeleting">
+                    <span *ngIf="farm.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!farm.isDeleting">Delete</span>
                 </button>
             </td>
         </tr>
-        <tr *ngIf="!users">
+        <tr *ngIf="!farms">
             <td colspan="4" class="text-center">
                 <span class="spinner-border spinner-border-lg align-center"></span>
             </td>

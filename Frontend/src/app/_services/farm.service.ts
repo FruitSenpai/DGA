@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+//import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,12 +8,13 @@ import { environment } from '@environments/environment';
 import { Farm } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
+
 export class FarmService {
     private farmSubject: BehaviorSubject<Farm>;
     public farm: Observable<Farm>;
 
     constructor(
-        private router: Router,
+        
         private http: HttpClient
     ) {
         this.farmSubject = new BehaviorSubject<Farm>(JSON.parse(localStorage.getItem('farm')));
@@ -28,8 +29,8 @@ export class FarmService {
 
    
 
-    register(farm: Farm) {
-        return this.http.post(`${environment.apiUrl}/farms/register`, farm);
+    create(farm: Farm) {
+        return this.http.post(`${environment.apiUrl}/farms/create`, farm);
     }
 
     getAll() {
